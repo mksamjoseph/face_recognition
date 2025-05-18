@@ -1,0 +1,14 @@
+version: '3.8'  # Use lowercase 'version'
+
+services:
+  face:
+    build: .
+    devices:
+      - "/dev/video0:/dev/video0"  # Map the video device for face recognition
+    privileged: true  # Grant privileged access (required for some devices)
+    command: >
+      daphne -e ssl:8000:privateKey=ssl/localhost.key:certKey=ssl/localhost.crt pro1.asgi:application
+    volumes:
+      - .:/app  # Map the current directory to /app in the container
+    ports:
+      - 8000:8000  # Expose port 8000

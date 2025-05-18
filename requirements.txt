@@ -1,0 +1,14 @@
+Django==4.2.11
+django-extensions
+dlib==19.24.6
+Jinja2
+numpy
+Werkzeug
+netifaces
+opencv-python-headless
+tqdm
+pyOpenSSL
+pillow
+scipy
+click
+daphne
