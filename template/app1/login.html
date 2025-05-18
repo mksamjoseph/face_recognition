@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackVyuha 2025 | Secure Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E3A59;
+            --alert: #F04C4C;
+            --light: #F8F9FA;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(46, 58, 89, 0.9), rgba(46, 58, 89, 0.9)), 
+                        url('https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo svg {
+            height: 80px;
+            width: auto;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .login-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--alert);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(240, 76, 76, 0.2);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--alert);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #d14343;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .login-footer {
+            margin-top: 25px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .login-footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .login-footer a:hover {
+            color: var(--alert);
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Camera Body -->
+                <rect x="30" y="50" width="140" height="100" rx="10" fill="var(--primary)" stroke="white" stroke-width="3"/>
+                
+                <!-- Camera Lens -->
+                <circle cx="100" cy="100" r="40" fill="var(--dark)"/>
+                <circle cx="100" cy="100" r="30" fill="#4A5A7A">
+                    <animate attributeName="r" values="30;33;30" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="100" cy="100" r="15" fill="var(--alert)"/>
+                
+                <!-- Radar Elements -->
+                <path d="M100 100 L180 100" stroke="var(--alert)" stroke-width="2" stroke-dasharray="5 3"/>
+                <path d="M100 100 L100 20" stroke="var(--alert)" stroke-width="2" stroke-dasharray="5 3"/>
+                
+                <!-- Active Scanning Line -->
+                <path d="M100 100 L100 20" stroke="white" stroke-width="3" stroke-linecap="round">
+                    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="4s" repeatCount="indefinite"/>
+                </path>
+            </svg>
+        </div>
+        
+        <div class="login-header">
+            <h2>IDentix Login</h2>
+        </div>
+        
+      <form method='POST'  action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="email">Email or Username</label>
+        <input type="text" id="username" class="form-control" name="username" placeholder="Enter email or username" required>
+        <span class="input-icon">📧</span>
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" name="password" placeholder="Enter password" required>
+        <span class="input-icon">🔒</span>
+    </div>
+    
+    <button type="submit" class="btn">Login</button>
+</form>
+
+    </div>
+</body>
+</html>

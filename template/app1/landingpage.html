@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time CCTV Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E3A59;
+            --alert: #F04C4C;
+            --light: #F8F9FA;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+       .logo-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .logo-svg {
+            width: 130px;
+            height: 130px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            transition: all 0.3s ease;
+        }
+        
+        .logo-svg:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+        }
+
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--alert);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(46, 58, 89, 0.9), rgba(46, 58, 89, 0.9)), 
+                        url('https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--alert);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #d14343;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+<svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Camera Body -->
+    <path d="M40 60 Q100 30 160 60 L160 140 Q100 170 40 140 Z" 
+          fill="var(--primary)" 
+          stroke="white" 
+          stroke-width="3"/>
+
+    <!-- Lens Layers -->
+    <circle cx="100" cy="100" r="42" fill="var(--dark)"/>
+    <circle cx="100" cy="100" r="32" fill="url(#lensGradient)"/>
+    <circle cx="100" cy="100" r="15" fill="var(--alert)"/>
+
+    <!-- Lens Gradient -->
+    <defs>
+      <linearGradient id="lensGradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#4A5A7A"/>
+        <stop offset="100%" stop-color="#2B3A50"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Radar Lines -->
+    <g stroke="var(--alert)" stroke-width="2" stroke-dasharray="5 3">
+      <path d="M100 100 L180 100"/>
+      <path d="M100 100 L100 20"/>
+      <path d="M100 100 L20 100"/>
+      <path d="M100 100 L100 180"/>
+    </g>
+
+    <!-- Rotating Scan Line -->
+    <path d="M100 100 L100 20" 
+          stroke="white" 
+          stroke-width="3" 
+          stroke-linecap="round">
+      <animateTransform 
+          attributeName="transform"
+          type="rotate"
+          from="0 100 100"
+          to="360 100 100"
+          dur="4s"
+          repeatCount="indefinite"/>
+    </path>
+
+    <!-- "FD" Text -->
+    <text x="100" y="105" text-anchor="middle" font-size="20" font-weight="bold" fill="white" font-family="Arial, sans-serif">
+      FD
+    </text>
+  </svg>
+</div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'feature'%}">Features</a></li>
+                    <li><a href="{% url 'team'%}">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>IDentix</h1>
+                <p>An advanced computer vision solution to enhance public safety by detecting and tracking individuals across surveillance networks in real-time.</p>
+                <a href="{% url 'login'%}" class="btn">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 Surveillance Tech. All rights reserved. Contects:91+ 6361400234<br>91+ 72877827788 , joseph@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

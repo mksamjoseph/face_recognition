@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team | HackVyuha 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2E3A59;
+      --alert: #F04C4C;
+      --secondary: #4A5568;
+      --light: #F7FAFC;
+      --dark: #1A202C;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F3F4F6;
+      color: var(--dark);
+    }
+    
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar Styles */
+    .sidebar {
+      width: 240px;
+      background-color: var(--primary);
+      color: white;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .logo {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+    
+    .logo h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+    }
+    
+    .logo p {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .nav-menu {
+      flex-grow: 1;
+    }
+    
+    .nav-item {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .nav-item:hover, .nav-item.active {
+      background-color: rgba(255,255,255,0.1);
+    }
+    
+    .nav-item i {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+    
+    .team-info {
+      padding: 20px;
+      font-size: 12px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    /* Main Content Styles */
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .header h1 {
+      color: var(--primary);
+      font-size: 24px;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .header-actions i {
+      font-size: 20px;
+      color: var(--secondary);
+      cursor: pointer;
+    }
+    
+    /* Team Section */
+    .team-section {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      padding: 24px;
+    }
+    
+    .team-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 24px;
+      border-bottom: 1px solid #EDF2F7;
+      padding-bottom: 12px;
+    }
+    
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .member-card {
+      background-color: #F7FAFC;
+      border-radius: 8px;
+      padding: 20px;
+      transition: all 0.3s;
+    }
+    
+    .member-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+    
+    .member-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .member-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin-right: 16px;
+    }
+    
+    .member-info h3 {
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    
+    .member-info p {
+      font-size: 14px;
+      color: var(--secondary);
+    }
+    
+    .member-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    
+    .skill-tag {
+      background-color: #E2E8F0;
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    
+    .member-contact {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+    }
+    
+    .member-contact a {
+      color: var(--secondary);
+      transition: all 0.2s;
+    }
+    
+    .member-contact a:hover {
+      color: var(--primary);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+      }
+      
+      .team-members {
+        grid-template-columns: 1fr;
+      }
+    }
+    a img {
+  vertical-align: middle;
+  transition: transform 0.2s;
+}
+
+a:hover img {
+  transform: scale(1.1);
+}
+
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="header">
+        <h1>Our Hackathon Team</h1>
+        <div class="header-actions">
+          
+          <a href="{% url 'landingpage' %}">
+  <i class="fas fa-sign-out-alt"></i> 
+</a>
+        </div>
+      </div>
+      
+      <div class="team-section">
+        <h2 class="team-title">Meet the Team</h2>
+        
+        <div class="team-members">
+          <!-- Joseph -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">J</div>
+              <div class="member-info">
+                <h3>Joseph</h3>
+                <p>Full stack</p>
+              </div>
+            </div>
+            <div class="member-skills">
+                <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Django</span>
+                <span class="skill-tag">mysql,sqlite</span>
+              <span class="skill-tag">API Design</span>
+              <span class="skill-tag">Database</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">UI/UX</span>
+                                    <span class="skill-tag">c ,c++</span>
+
+            </div>
+            <div class="member-contact">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="https://web.whatsapp.com/"><i class="fab fa-linkedin"></i></a>
+              <a href="https://leetcode.com/u/MK_JOSEPH/" target="_blank">
+                <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg" alt="LeetCode" style="width: 32px; height: auto;">
+                </a>
+            </div>
+          </div>
+          
+          <!-- Akhil -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">A</div>
+              <div class="member-info">
+                <h3>Akhil</h3>
+                <p>Frontend Developer</p>
+              </div>
+            </div>
+             <div class="member-skills">
+                <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Django</span>
+                <span class="skill-tag">mysql,sqlite</span>
+              <span class="skill-tag">API Design</span>
+              <span class="skill-tag">Database</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">UI/UX</span>
+                                    <span class="skill-tag">c ,c++</span>
+
+            </div>
+            <div class="member-contact">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+               <a href="https://leetcode.com/u/akhil3772/" target="_blank">
+                <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg" alt="LeetCode" style="width: 32px; height: auto;">
+                </a>
+            </div>
+          </div>
+          
+          <!-- Natraj -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">N</div>
+              <div class="member-info">
+                <h3>Natraj</h3>
+                <p>Full stack</p>
+              </div>
+            </div>
+            <div class="member-skills">
+                <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Django</span>
+                <span class="skill-tag">mysql,sqlite</span>
+              <span class="skill-tag">API Design</span>
+              <span class="skill-tag">Database</span>
+                                      <span class="skill-tag">c ,c++</span>
+
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">UI/UX</span>
+            </div>
+            <div class="member-contact">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="https://leetcode.com/u/Natarajam1234/" target="_blank">
+                <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg" alt="LeetCode" style="width: 32px; height: auto;">
+                </a>
+            </div>
+          </div>
+          
+          <!-- Bhaskar -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">B</div>
+              <div class="member-info">
+                <h3>Bhaskar</h3>
+                <p>database</p>
+              </div>
+            </div>
+             <div class="member-skills">
+                <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Django</span>
+                <span class="skill-tag">mysql,sqlite</span>
+              <span class="skill-tag">API Design</span>
+              <span class="skill-tag">Database</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">UI/UX</span>
+                                    <span class="skill-tag">c ,c++</span>
+
+            </div>
+            <div class="member-contact">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+               <a href="https://leetcode.com/u/Vijaybhaskarg//" target="_blank">
+                <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg" alt="LeetCode" style="width: 32px; height: auto;">
+                </a>
+            </div>
+          </div>
+          
+          <!-- Santosh -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">S</div>
+              <div class="member-info">
+                <h3>Santosh</h3>
+                <p>Full stack</p>
+              </div>
+            </div>
+             <div class="member-skills">
+                
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Django</span>
+                <span class="skill-tag">Django</span>
+                <span class="skill-tag">mysql,sqlite</span>
+              <span class="skill-tag">Database</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">c ,c++</span>
+                                                <span class="skill-tag">docker</span>
+                        <span class="skill-tag">AI/ML</span>
+            </div>
+             <div class="member-contact">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+               <a href="https://leetcode.com/u/Santosh/" target="_blank">
+                <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg" alt="LeetCode" style="width: 32px; height: auto;">
+                </a>
+            </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

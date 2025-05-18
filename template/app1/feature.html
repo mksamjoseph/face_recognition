@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart CCTV Features</title>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* Modern, Clean Styling */
+        :root {
+            --blue: #2563eb;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --highlight: #e0f2fe;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 2.4rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--blue);
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-details {
+            background: var(--highlight);
+            border-left: 4px solid var(--blue);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .feature-details p {
+            color: var(--dark);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        .feature-details strong {
+            color: var(--blue);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+        }
+        .corner-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000; 
+        }
+
+.corner-button a {
+  color: white;
+  text-decoration: none;
+ 
+
+}
+
+.corner-button:hover {
+  background-color: #0056b3;
+ 
+
+}
+
+    </style>
+</head>
+<body>
+    <div class="features-container">
+        <div class="header">
+            <h1>Real-Time Individual Detection from CCTV Feeds  Features</h1>
+            <p>Our system automatically detects and tracks people across your CCTV network, helping you monitor what matters most.</p>
+        </div>
+         <div class="main-content">
+      <div class="header">
+        <h1>Our Hackathon Team</h1>
+        <div class="header-actions">
+          
+<button class="corner-button">
+  <a href="{% url 'landingpage' %}">Back to Land Page</a>
+</button>
+
+        </div>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature">
+                <div class="feature-icon">👤</div>
+                <h3>Instant Person Detection</h3>
+                <p>Spots people automatically in live video, even in busy areas or poor lighting.</p>
+                <div class="feature-details">
+                    <p><strong>Works when:</strong> Faces are partially hidden, in shadows, or at angles</p>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature">
+                <div class="feature-icon">🔄</div>
+                <h3>Seamless Camera Tracking</h3>
+                <p>Follows the same person as they move between different camera views.</p>
+                <div class="feature-details">
+                    <p><strong>Example:</strong> Tracks someone from parking lot to building entrance</p>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Live Alerts</h3>
+                <p>Processes video instantly so you can respond right away.</p>
+                <div class="feature-details">
+                    <p><strong>Speed:</strong> Less than 1 second delay on live feeds</p>
+                </div>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy Protection</h3>
+                <p>Optional face blurring to comply with privacy laws.</p>
+                <div class="feature-details">
+                    <p><strong>Options:</strong> Automatic blurring or selective visibility</p>
+                </div>
+            </div>
+            
+            <!-- Feature 5 -->
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <h3>Activity Insights</h3>
+                <p>Shows where people go most often and how long they stay.</p>
+                <div class="feature-details">
+                    <p><strong>Reports:</strong> Busy times, suspicious loitering</p>
+                </div>
+            </div>
+            
+            <!-- Feature 6 -->
+            <div class="feature">
+                <div class="feature-icon">🌙</div>
+                <h3>All-Day Reliability</h3>
+                <p>Works equally well day or night, rain or shine.</p>
+                <div class="feature-details">
+                    <p><strong>Adapts to:</strong> Lighting changes, weather, seasons</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

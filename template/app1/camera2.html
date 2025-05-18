@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Camera 2 - Gate A | HackVyuha 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+      padding: 10px;
+    }
+    .dashboard {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    #camera1-container {
+    position: relative;
+    border: 2px solid #444;
+    width: 640px;
+    height: 480px;
+    background: black;
+  }
+    video, canvas {
+      border: 1px solid black;
+    }
+    #canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+    <div class="camera-container" id="camera1-container">
+      <video id="video" autoplay muted></video>
+      <canvas id="canvas"></canvas>
+    </div>
+  </div>
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+    const cameraName = "camera_b";  // 👈 set for mobile
+
+    // WebSocket connection
+    let socket;
+
+    function connectWebSocket() {
+      // Adjust the URL according to your deployment (ws:// or wss://)
+      const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+      const ws_path = `${ws_scheme}://${window.location.host}/ws/face_recognition/`;
+      socket = new WebSocket(ws_path);
+
+      socket.onopen = () => {
+        console.log("WebSocket connected");
+        runFaceDetectionLoop();
+      };
+
+      socket.onmessage = (event) => {
+        // Receive recognized faces data from server
+        const data = JSON.parse(event.data);
+        if (data.faces) {
+          drawBoxes(data.faces);
+        }
+      };
+
+      socket.onclose = () => {
+        console.log("WebSocket disconnected. Attempting to reconnect in 3 seconds...");
+        setTimeout(connectWebSocket, 3000);
+      };
+
+      socket.onerror = (error) => {
+        console.error("WebSocket error:", error);
+      };
+    }
+
+    // Start webcam and set canvas size
+    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      video.srcObject = stream;
+      video.onloadedmetadata = () => {
+        video.play();
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        connectWebSocket();
+      };
+    });
+
+    function runFaceDetectionLoop() {
+      setInterval(() => {
+        captureAndSendFrame();
+      }, 800); // Send frame every 800ms
+    }
+
+    function captureAndSendFrame() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      const frameData = canvas.toDataURL('image/jpeg'); // base64 image
+
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({ 
+            frame: frameData,
+            camera_name: cameraName
+        }));
+      }
+    }
+
+    function drawBoxes(faces) {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  faces.forEach(face => {
+    const { x, y, width, height, name } = face;
+
+    // Draw the bounding box
+    context.beginPath();
+    context.rect(x, y, width, height);
+    context.lineWidth = 6; // Thicker border
+    context.strokeStyle = name.startsWith("unknown") ? 'red' : 'green';
+    context.stroke();
+
+    // Set font style
+    context.fillStyle = name.startsWith("unknown") ? 'red' : 'green';
+    context.font = "28px Arial"; // Larger font
+
+    // Center the name text below the box
+    const textWidth = context.measureText(name).width;
+    const textX = x + (width / 2) - (textWidth / 2);
+    const textY = y + height + 35;
+
+    context.fillText(name, textX, textY);
+  });
+}
+</script>
+</body>
+</html>
